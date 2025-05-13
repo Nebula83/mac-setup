@@ -1,5 +1,6 @@
 echo "-- BOOTSTRAP SCRIPT, RUN UNTIL 'BOOTSTRAP COMPLETE' IS DISPLAYED --"
 
+# SSH key
 ssh_key_file=/Users/$USER/.ssh/id_ed25519.pub
 if ! [ -f $ssh_key_file ]
 then
@@ -14,6 +15,7 @@ echo "+ Please add this public key to Github \n"
 echo "  https://github.com/account/ssh \n"
 read -p "  Press [Enter] key after this..."
 
+# Dev env for mac
 if ! command -v git 2>&1 >/dev/null
 then
   echo "+ Installing xcode-stuff, takes around 15 minutes"
@@ -22,6 +24,11 @@ else
   echo "+ xcode is installed"
 fi
 
+# Ensure git is setup correctly
+git config --global user.name "Jasper van Zuijlen"
+git config --global user.email "jvanzuijlen@gmail.com"
+
+# Ansible
 if ! command -v ansible  2>&1 >/dev/null
 then
   echo "+ Install ansible for further configuration"
@@ -45,4 +52,3 @@ then
   echo "export PATH=\"\$PATH:$ansible_path\"" >> $zsh_env_file
   echo "  source '. ~/.zshenv' or reload the shell"
 fi
-

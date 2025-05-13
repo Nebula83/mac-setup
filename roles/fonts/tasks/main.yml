@@ -1,0 +1,10 @@
+---
+
+- name: Installing fonts
+  tags: fonts
+  register: result
+  until: result is successful
+  with_items: "{{ fonts }}"
+  ansible.builtin.homebrew_cask:
+    name: "font-{{ item }}-nerd-font"
+    state: present

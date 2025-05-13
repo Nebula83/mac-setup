@@ -11,6 +11,8 @@
       ansible.builtin.file:
         path: "{{ ansible_download }}"
         state: directory
-        mode: '0755'
+        mode: "0755"
   roles:
     - homebrew
+    - fonts
+    - zsh

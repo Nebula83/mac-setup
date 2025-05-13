@@ -1,0 +1,34 @@
+---
+
+- name: Download ohmyzsh
+  tags: zsh
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+    dest: "{{ ansible_download }}/install-oh-my-zsh.sh"
+    mode: "0755"
+
+- name: Check if ohmyzsh is already installed
+  tags: zsh
+  ansible.builtin.stat:
+    path: "{{ user_home }}/.oh-my-zsh"
+  register: ohmyzsh_installed
+
+- name: Install ohmyzsh
+  tags: zsh
+  when: not ohmyzsh_installed.stat.exists
+  ansible.builtin.script:
+    cmd: "{{ ansible_download }}/install-oh-my-zsh.sh"
+
+- name: Install PowerLevel10K
+  tags: zsh
+  ansible.builtin.git:
+    repo: https://github.com/romkatv/powerlevel10k.git
+    dest: "{{ user_home }}/.oh-my-zsh/custom/themes/powerlevel10k"
+    depth: 1
+
+- name: Update .zshrc
+  tags: zsh
+  ansible.builtin.lineinfile:
+    path: "{{ user_home }}/.zshrc"
+    insertafter: EOF
+    line: "source {{ user_home }}//.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme"
