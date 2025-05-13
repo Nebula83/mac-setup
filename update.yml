@@ -1,7 +1,6 @@
-- name: Test commands
+- name: Setup my mac to fit my needs
   hosts: localhost
   connection: local
-  gather_facts: false
   vars:
     user_home: "{{ lookup('ansible.builtin.env', 'HOME') }}"
     ansible_download: "{{ lookup('ansible.builtin.env', 'HOME') }}/.ansible-download"
