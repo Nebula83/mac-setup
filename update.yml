@@ -1,0 +1,16 @@
+- name: Test commands
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars:
+    user_home: "{{ lookup('ansible.builtin.env', 'HOME') }}"
+    ansible_download: "{{ lookup('ansible.builtin.env', 'HOME') }}/.ansible-download"
+  pre_tasks:
+    - name: Ensure ansible_download directory exists
+      tags: always
+      ansible.builtin.file:
+        path: "{{ ansible_download }}"
+        state: directory
+        mode: '0755'
+  roles:
+    - homebrew

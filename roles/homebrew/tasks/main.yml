@@ -1,0 +1,52 @@
+---
+
+- name: Check if Homebrew is installed
+  tags: homebrew
+  register: homebrew_check
+  ansible.builtin.stat:
+    path: /opt/homebrew/bin/brew
+
+- name: Ensure sudo session
+  tags: homebrew
+  when: not homebrew_check.stat.exists
+  ansible.builtin.pause:
+    prompt: "Please run 'sudo ls' to ensure a sudo session is active. Press Enter to continue."
+
+- name: Installing Homebrew
+  tags: homebrew
+  when: not homebrew_check.stat.exists
+  vars:
+    homebrew_url: https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+  ansible.builtin.shell: /bin/bash -c "$(curl -fsSL {{ homebrew_url  }})"
+  
+- name: Updating Homebrew
+  tags: homebrew
+  when: homebrew_check.stat.exists
+  ansible.builtin.homebrew:
+    update_homebrew: true
+
+- name: Upgrading Homebrew Packages
+  tags: homebrew
+  when: homebrew_check.stat.exists
+  until: result is successful
+  register: result
+  ansible.builtin.homebrew:
+    upgrade_all: "{{ upgrade_homebrew_packages }}"
+
+- name: Installing Homebrew Cask Packages
+  tags: homebrew
+  when: homebrew_check.stat.exists
+  register: result
+  until: result is successful
+  ansible.builtin.homebrew_cask:
+    name: "{{ brew_cask_packages }}"
+    state: present
+
+- name: Installing Homebrew Packages
+  tags: homebrew
+  when: homebrew_check.stat.exists
+  register: result
+  until: result is successful
+  ansible.builtin.homebrew:
+    name: "{{ brew_packages }}"
+    state: present
