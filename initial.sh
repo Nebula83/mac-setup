@@ -31,18 +31,18 @@ else
   echo "+ Ansible is installed"
 fi
 
-bash_profile_file=$HOME/.bash_profile
-if ! [ -f $bash_profile_file ]
+zsh_env_file=$HOME/.zshenv
+if ! [ -f $zsh_env_file ]
 then
-  echo "+ Creating bash profile"
-  touch $bash_profile_file
+  echo "+ Creating zsh env"
+  touch $zsh_env_file
 fi
 
 ansible_path="/Users/$USER/Library/Python/3.9/bin"
-if ! grep -Fq $ansible_path $bash_profile_file
+if ! grep -Fq $ansible_path $zsh_env_file
 then
   echo "+ Adding ansible to PATH"
-  echo "export PATH=\"\$PATH:$ansible_path\"" >> $bash_profile_file
-  echo "  source '. ~/.bash_profile' or reload the shell
+  echo "export PATH=\"\$PATH:$ansible_path\"" >> $zsh_env_file
+  echo "  source '. ~/.zshenv' or reload the shell"
 fi
 
