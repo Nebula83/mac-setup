@@ -13,6 +13,9 @@
     path: "{{ user_home }}/.oh-my-zsh"
   register: ohmyzsh_installed
 
+
+# Given that brew is initialized at the start of zshrc, this bit will also make sure shell 
+# completion is loaded.
 - name: Install ohmyzsh
   tags: zsh
   when: not ohmyzsh_installed.stat.exists
@@ -30,5 +33,4 @@
   tags: zsh
   ansible.builtin.lineinfile:
     path: "{{ user_home }}/.zshrc"
-    insertafter: EOF
     line: "source {{ user_home }}//.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme"
