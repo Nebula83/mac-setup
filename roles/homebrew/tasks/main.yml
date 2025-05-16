@@ -20,12 +20,13 @@
     homebrew_url: https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
   ansible.builtin.shell: /bin/bash -c "$(curl -fsSL {{ homebrew_url  }})"
 
-- name: Ensure Homebrew is in PATH
+- name: Ensure Homebrew is loaded in zsh
   tags: homebrew
   when: homebrew_check.stat.exists
   ansible.builtin.lineinfile:
-    path: "{{ user_home }}/.zshenv"
-    line: 'export PATH="/opt/homebrew/bin:$PATH"'
+    insertbefore: BOF
+    path: "{{ user_home }}/.zshrc"
+    line: 'eval "$(/opt/homebrew/bin/brew shellenv)"'
   
 - name: Updating Homebrew
   tags: homebrew
