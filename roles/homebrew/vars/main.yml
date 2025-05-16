@@ -2,8 +2,23 @@
 
 upgrade_homebrew_packages: false
 brew_cask_packages:
+  - balenaetcher
+  - bitwarden
+  - dropbox
+  - gimp
   - google-chrome
+  - inkscape
   - iterm2
+  - logi-options-plus
+  - openscad
+  - postman
+  - prusaslicer
+  - qr-journal
   - spotify
+  - tiptoi-manager
   - visual-studio-code
+  - vlc
+  - vnc-viewer
+  - whatsapp
 brew_packages:
+  - wireguard-tools
