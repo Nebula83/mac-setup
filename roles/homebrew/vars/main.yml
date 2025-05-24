@@ -21,4 +21,5 @@ brew_cask_packages:
   - vnc-viewer
   - whatsapp
 brew_packages:
+  - python@3.13
   - wireguard-tools
