@@ -5,4 +5,3 @@
   ansible.builtin.command:
     cmd: killall Finder
   changed_when: false
-  

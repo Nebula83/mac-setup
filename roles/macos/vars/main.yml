@@ -7,7 +7,7 @@ mac_settings:
     key: NSDocumentSaveNewDocumentsToCloud
     value: false
   
-# "Disable smart quotes and smart dashes as they are annoying when typing code"
+  # "Disable smart quotes and smart dashes as they are annoying when typing code"
   - domain: NSGlobalDomain
     type: bool
     key: NSAutomaticQuoteSubstitutionEnabled
@@ -17,29 +17,29 @@ mac_settings:
     key: NSAutomaticDashSubstitutionEnabled
     value: false
 
-# #"Showing all filename extensions in Finder by default"
+  # "Showing all filename extensions in Finder by default"
   - domain: NSGlobalDomain
     type: bool
     key: AppleShowAllExtensions
     value: true
 
-# #"Avoiding the creation of .DS_Store files on network volumes"
+  # "Avoiding the creation of .DS_Store files on network volumes"
   - domain: com.apple.desktopservices
     type: bool
     key: DSDontWriteNetworkStores
     value: true
 
-# #"Disabling the warning when changing a file extension"
+  # "Disabling the warning when changing a file extension"
   - domain: com.apple.finder
     type: bool
     key: FXEnableExtensionChangeWarning
     value: false
 
-# #"Setting Dock to auto-hide and removing the auto-hiding delay"
+  # "Setting Dock to auto-hide and removing the auto-hiding delay"
   - domain: com.apple.dock
     type: bool
     key: autohide
-    value: true
+    value: false
   - domain: com.apple.dock
     type: float
     key: autohide-delay
@@ -49,19 +49,36 @@ mac_settings:
     key: autohide-time-modifier
     value: 0
 
-# #"Disable annoying backswipe in Chrome"
+  # Setup control panel to show sound, bluetooth and wifi.
+  - domain: com.apple.controlcenter
+    type: int
+    key: Sound
+    value: 18
+    current_host: true
+  - domain: com.apple.controlcenter
+    type: int
+    key: Bluetooth
+    value: 2
+    current_host: true
+  - domain: com.apple.controlcenter
+    type: int
+    key: WiFi
+    value: 2
+    current_host: true
+
+  # "Disable annoying backswipe in Chrome"
   - domain: com.google.Chrome
     type: bool
     key: AppleEnableSwipeNavigateWithScrolls
     value: false
 
-# #"Setting screenshots location to ~/Desktop"
+  # "Setting screenshots location to ~/Desktop"
   - domain: com.apple.screencapture
     type: string
     key: location
     value: "$HOME/Desktop"
 
-# #"Setting screenshot format to PNG"
+  # "Setting screenshot format to PNG"
   - domain: com.apple.screencapture
     type: string
     key: type
